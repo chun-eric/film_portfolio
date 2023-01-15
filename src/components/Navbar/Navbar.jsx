@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles/';
-
+import { Sidebar } from '..'
 
 
 export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -83,6 +83,38 @@ function Navbar() {
           </div>
           {isMobile && 'Search...'}
         </StyledToolbar>
+
+
+        <div>
+          <nav
+            style={{
+              xs: { display: 'none' },
+              width: '240px',
+              flexShrink: 0,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+            {isMobile ? (
+              <Drawer
+                variant="temporary"
+                anchor="right"
+                open={mobileOpen}
+                onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
+                ModalProps={{ keepMounted: true }}
+                sx={{ paper: { width: '240px' } }}>
+                <Sidebar setMobileOpen={setMobileOpen} />
+              </Drawer>
+            ) : (
+              <Drawer
+                sx={{ paper: { width: '240px' } }}
+                variant="permanent"
+                open>
+                <Sidebar setMobileOpen={setMobileOpen} />
+              </Drawer>)}
+          </nav>
+        </div>
+
+
       </AppBar>
     </>
   );
